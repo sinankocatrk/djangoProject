@@ -6,7 +6,10 @@
 <br><br>
     <p>Kaydol</p> 
     <form method = "post">
+        {% csrf_token %}
         {{form.as_p}}
+        <br>
+        <button type = "submit" class = "btn btn-danger">Giriş Yap</button>
     </form>
     
 </div>
