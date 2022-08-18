@@ -1,15 +1,18 @@
 {% extends 'layout.html' %}
-
+{% load crispy_forms_tags %}
 
 {% block body %}
-<div style= "margin-top : 100px;" class="jumbotron text-center">
+<div class="row">
+    <div class="col-md-6 offset-md-3">
     <br><br>
         <p>Giriş Yap</p> 
         <form method = "post">
             {% csrf_token %}
-            {{form.as_p}}
+            {{form|crispy}}
             <br>
             <button type = "submit" class = "btn btn-danger">Giriş Yap</button>
         </form>
+    </div>
+</div>
         
 {% endblock  %}
