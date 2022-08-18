@@ -20,13 +20,11 @@ def addnick(request):
         }
 
     if form.is_valid():
-        title = form.cleaned_data.get("title")
-        content = form.cleaned_data.get("content")
-        nick=Nick()
-        nick.title=title
-        nick.content=content
+        nick = form.save(commit=False)
+        
         nick.author = request.user
         nick.save()
+
         messages.success(request,"Makale başarıyla oluşturuldu")
         return redirect("nick:dashboard")
 
