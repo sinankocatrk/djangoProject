@@ -18,3 +18,8 @@ class RegisterForm(forms.Form):
             "password" : password
         }
         return values
+
+class LoginForm(forms.Form):
+    username = forms.CharField(max_length= 50,label="Kullanıcı adı: ")
+    password = forms.CharField(max_length=20,label="Parola",widget =forms.PasswordInput)
+

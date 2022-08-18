@@ -4,12 +4,12 @@
 {% block body %}
 <div style= "margin-top : 100px;" class="jumbotron text-center">
 <br><br>
-    <p>Kaydol</p> 
+    <p>Kayıt Ol</p> 
     <form method = "post">
         {% csrf_token %}
         {{form.as_p}}
         <br>
-        <button type = "submit" class = "btn btn-danger">Giriş Yap</button>
+        <button type = "submit" class = "btn btn-danger">Kayıt Ol</button>
     </form>
     
 </div>
