@@ -7,7 +7,6 @@ app_name= "nick"
 
 
 urlpatterns = [
-    path('create/', views.index,name= "index"),
-
-     
+    path('dashboard/', views.dashboard,name= "dashboard"),
+    path('addnick/', views.addnick,name= "addnick"),     
 ]
