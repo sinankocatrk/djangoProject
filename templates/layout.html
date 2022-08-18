@@ -8,11 +8,31 @@
     <title>Whose İtem</title>
 
 </head>
-<body> <div class="container">
-   {% include "includes/navbar.html" %}
-    {% block body %}
+<body>
+    
+    {% include "includes/navbar.html" %}
 
-    {% endblock  %} </div>
+        
+
+    <div style = "margin-top : 100px; margin-bottom:100px;" class = "container">
+            
+        {% if messages %}
+            
+                {% for message in messages %}
+                {% if message.tags == "info" %}
+                <div class="alert alert-danger">{{ message }}</div>
+                {% else %}
+                <div class="alert alert-{{ message.tags }}">{{ message }}</div>
+
+                {% endif %}
+
+
+                {% endfor %}
+            
+            {% endif %}
+        {% block body %}
+        
+        {% endblock body %}
 
 
 
