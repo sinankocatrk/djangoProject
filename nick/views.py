@@ -1,4 +1,4 @@
-from django.shortcuts import render,HttpResponse,redirect
+from django.shortcuts import render,HttpResponse,redirect,get_object_or_404
 from .forms import NickForm
 from .models import Nick
 from django.contrib import messages
@@ -36,6 +36,14 @@ def addnick(request):
 
 
     return render(request,"addnick.html",context)
+
+
+def detail(request,id):
+    form = get_object_or_404(Nick,id=id)
+
+
+    return render(request,"detail.html",{"form": form})
+
 
 
 
