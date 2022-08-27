@@ -63,20 +63,12 @@ def update(request,id):
 def delete(request,id):
 
     form = get_object_or_404(Nick,id=id)
+    form.delete()
 
-    form = NickForm(request.POST or None,request.FILES or None,instance = form)
-    if form.is_valid():
-        nick = form.save(commit=False)
-        
-        nick.author = request.user
-        nick.delete()
+    messages.success(request,"Makale başarıyla silindi")
 
-        messages.success(request,"Makale başarıyla silindi")
-        return redirect("index")
     
-
-
-    return render(request,"dashboard.html")
+    return redirect("nick:dashboard")
 
 
 
