@@ -44,4 +44,40 @@ def detail(request,id):
 
 
 
+def update(request,id):
+
+    form = get_object_or_404(Nick,id=id)
+
+    form = NickForm(request.POST or None,request.FILES or None,instance = form)
+    if form.is_valid():
+        nick = form.save(commit=False)
+        
+        nick.author = request.user
+        nick.save()
+
+        messages.success(request,"Makale başarıyla güncellendi")
+        return redirect("index")
+    
+    return render(request,"update.html",{"form":form})  
+
+def delete(request,id):
+
+    form = get_object_or_404(Nick,id=id)
+
+    form = NickForm(request.POST or None,request.FILES or None,instance = form)
+    if form.is_valid():
+        nick = form.save(commit=False)
+        
+        nick.author = request.user
+        nick.delete()
+
+        messages.success(request,"Makale başarıyla silindi")
+        return redirect("index")
+    
+
+
+    return render(request,"dashboard.html")
+
+
+
 
