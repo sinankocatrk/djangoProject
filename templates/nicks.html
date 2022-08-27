@@ -1,0 +1,53 @@
+{% extends 'layout.html' %}
+{% load crispy_forms_tags %}
+
+{% block body %}
+<div class="row">
+    <div class="col-md-6 offset-md-3">
+
+        <h2>Kayıtlı Nickler</h2> 
+        <hr>
+        <p>Hoşgeldiniz, <small>{{request.user.username}} </small></p> 
+
+
+            {% if articles %}
+            <table class="table">
+                    <thead>
+                    <tr>
+                        <th scope="col">id</th>
+                        <th scope="col">Başlık</th>
+                        <th scope="col">Yazar</th>
+                        <th scope="col">Tarih</th>
+
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for article  in articles %}
+                    <tr>
+                        <th scope="row">{{article.id}}</th>
+                        <td><a href="/nick/nick/{{article.id}}">{{article.title}}</a></td>
+                        <td>{{article.author.username}}</td>
+                        <td>{{article.created_date}}</td>
+
+                        
+                    </tr>
+                    {% endfor %}
+                    
+                    </tbody>
+                </table>
+            {% else %}
+            
+            <div class = "alert alert-danger">
+                Henüz bir makaleniz bulunmuyor...
+            
+            </div>
+            {% endif %}
+            
+
+            <br>
+
+
+    </div>
+</div>
+        
+{% endblock  %}

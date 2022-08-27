@@ -72,6 +72,18 @@ def delete(request,id):
     
     return redirect("nick:dashboard")
 
+@login_required(login_url="user:login")
+def nicks(request):
+
+    articles = Nick.objects.filter()
+    context = {
+        "articles" : articles
+    }
+    return render(request,"nicks.html",context)
+
+
+    
+
 
 
 
