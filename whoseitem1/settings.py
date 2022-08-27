@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'nick',
     'user',
     'crispy_forms',
+    'ckeditor',
 ]
 
 MIDDLEWARE = [
@@ -123,6 +124,10 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, "static"),
    
 ]
+STATIC_ROOT = os.path.join(BASE_DIR,"staticfiles")
+
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
+
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
@@ -130,4 +135,10 @@ STATICFILES_DIRS = [
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
-CRISPY_TEMPLATE_PACK = 'bootstrap4'
+CKEDITOR_CONFIGS = {
+    "default": {
+        "removePlugins": "stylesheetparser",
+        "allowedContent" : True,
+        "width" : "100%",
+    }
+}
