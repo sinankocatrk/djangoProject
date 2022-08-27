@@ -9,6 +9,11 @@
         <hr>
         <p>Hoşgeldiniz, <small>{{request.user.username}} </small></p> 
 
+        <form>
+            {% csrf_token %} 
+           <input type="text" name = "keyword" class="input-sm" maxlength="64" placeholder="Ara...">
+         <button type="submit" class="btn btn-danger">Ara</button>
+       </form>
 
             {% if articles %}
             <table class="table">
@@ -38,7 +43,7 @@
             {% else %}
             
             <div class = "alert alert-danger">
-                Henüz bir makaleniz bulunmuyor...
+                Nick Bulunamadı
             
             </div>
             {% endif %}

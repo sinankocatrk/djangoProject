@@ -74,6 +74,11 @@ def delete(request,id):
 
 @login_required(login_url="user:login")
 def nicks(request):
+    keyword = request.GET.get("keyword")
+
+    if keyword :
+        articles = Nick.objects.filter(title__contains = keyword)
+        return render(request,"nicks.html",{"articles":articles})
 
     articles = Nick.objects.filter()
     context = {
