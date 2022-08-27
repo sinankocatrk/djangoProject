@@ -18,7 +18,7 @@ def dashboard(request):
     return render(request,"dashboard.html",context)
 
 def addnick(request):
-    form = NickForm(request.POST or None)
+    form = NickForm(request.POST or None,request.FILES or None)
     context = {
             "form" : form
         }
@@ -33,8 +33,6 @@ def addnick(request):
         return redirect("nick:dashboard")
 
         
-
-
     return render(request,"addnick.html",context)
 
 

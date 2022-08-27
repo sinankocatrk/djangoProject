@@ -8,14 +8,12 @@
         <h2>Nick Ekleme Ekranı</h2> 
         <hr>
         <p>Eklemek istediğiniz nickleri giriniz, <small>{{request.user.username}} </small></p>  <hr>
-        <form method = "post">
+        <form method = "post" enctype="multipart/form-data">
             {% csrf_token %}
             {{form.media}}
             {{form|crispy}}
             <br>
-            <a href="/nick/addnick">
-                <button>Nick Ekle</button>
-              </a> 
+            <button type = "submit" class = "btn btn-danger">Nick Ekle</button>
         </form>
     </div>
 </div>

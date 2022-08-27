@@ -17,15 +17,15 @@
 
     <hr>
 
-    <!-- Date/Time -->
+    <!--Date/Time -->
     <p>{{form.created_date}}</p>
 
     <hr>
 
-    <!-- Preview Image 
-    {% if article.article_image %}
-    <img class="img-fluid rounded" src="{{article.article_image.url}}" alt="">
-    {% endif %} -->
+    <!--  Preview Image  -->
+    {% if form.article_image %}
+    <img class="img-fluid rounded" src="{{form.article_image.url}}" alt="">
+    {% endif %} 
    
 
     <hr>
