@@ -2,6 +2,7 @@ from django.shortcuts import render,HttpResponse,redirect,get_object_or_404
 from .forms import NickForm
 from .models import Nick
 from django.contrib import messages
+from django.contrib.auth.decorators import login_required
 # Create your views here.
 def index(request):
 
@@ -10,13 +11,14 @@ def index(request):
 def about(request):
     return render(request,"about.html")
 
+@login_required(login_url="user:login")
 def dashboard(request):
     form = Nick.objects.filter(author=request.user)
     context = {
         "form" : form
     }
     return render(request,"dashboard.html",context)
-
+@login_required(login_url="user:login")
 def addnick(request):
     form = NickForm(request.POST or None,request.FILES or None)
     context = {
@@ -35,7 +37,7 @@ def addnick(request):
         
     return render(request,"addnick.html",context)
 
-
+@login_required(login_url="user:login")
 def detail(request,id):
     form = get_object_or_404(Nick,id=id)
 
@@ -43,7 +45,7 @@ def detail(request,id):
     return render(request,"detail.html",{"form": form})
 
 
-
+@login_required(login_url="user:login")
 def update(request,id):
 
     form = get_object_or_404(Nick,id=id)
@@ -59,7 +61,7 @@ def update(request,id):
         return redirect("index")
     
     return render(request,"update.html",{"form":form})  
-
+@login_required(login_url="user:login")
 def delete(request,id):
 
     form = get_object_or_404(Nick,id=id)
