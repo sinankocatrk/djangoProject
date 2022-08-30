@@ -26,14 +26,14 @@
                     </tr>
                     </thead>
                     <tbody>
-                    {% for article in form %}
+                    {% for nick in form %}
                     <tr>
-                        <th scope="row">{{article.id}}</th>
-                        <td><a href="/nick/nick/{{article.id}}">{{article.title}}</a></td>
-                        <td>{{article.author.username}}</td>
-                        <td>{{article.created_date}}</td>
-                        <td><a href="/nick/update/{{article.id}}/" class = "btn btn-danger">Güncelle</a></td>
-                        <td><a href="/nick/delete/{{article.id}}/" class = "btn btn-danger">Sil</a> </td>
+                        <th scope="row">{{nick.id}}</th>
+                        <td><a href="{% url 'nick:detail' nick.id %}">{{nick.title}}</a></td>
+                        <td>{{nick.author.username}}</td>
+                        <td>{{nick.created_date}}</td>
+                        <td><a href="{% url 'nick:update' nick.id %}" class = "btn btn-danger">Güncelle</a></td>
+                        <td><a href="{% url 'nick:delete' nick.id %}" class = "btn btn-danger">Sil</a> </td>
                         
                     </tr>
                     {% endfor %}

@@ -13,4 +13,57 @@
     Giriş yapılmamış 
 {% endif %}
 
+<div class="row">
+    <div class="col-md-6 offset-md-3">
+
+        <h2>Kayıtlı Nickler</h2> 
+        <hr>
+        <p>Hoşgeldiniz, <small>{{request.user.username}} </small></p> 
+
+        <form>
+            {% csrf_token %} 
+           <input type="text" name = "keyword" class="input-sm" maxlength="64" placeholder="Ara...">
+         <button type="submit" class="btn btn-danger">Ara</button>
+       </form>
+
+            {% if articles %}
+            <table class="table">
+                    <thead>
+                    <tr>
+                        <th scope="col">id</th>
+                        <th scope="col">Başlık</th>
+                        <th scope="col">Yazar</th>
+                        <th scope="col">Tarih</th>
+
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for article  in articles %}
+                    <tr>
+                        <th scope="row">{{article.id}}</th>
+                        <td><a href="{% url 'nick:detail' article.id %}">{{article.title}}</a></td> 
+                        <td>{{article.author.username}}</td>
+                        <td>{{article.created_date}}</td>
+
+                        
+                    </tr>
+                    {% endfor %}
+                    
+                    </tbody>
+                </table>
+            {% else %}
+            
+            <div class = "alert alert-danger">
+                Nick Bulunamadı
+            
+            </div>
+            {% endif %}
+            
+
+            <br>
+
+
+    </div>
+</div>
+
 {% endblock  %}
