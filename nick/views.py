@@ -1,6 +1,8 @@
-from django.shortcuts import render,HttpResponse,redirect,get_object_or_404
+from django.shortcuts import render,HttpResponse,redirect,get_object_or_404,reverse
+
+import nick
 from .forms import NickForm
-from .models import Nick
+from .models import Nick,Comment
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 # Create your views here.
@@ -50,10 +52,10 @@ def addnick(request):
 
 @login_required(login_url="user:login")
 def detail(request,id):
-    form = get_object_or_404(Nick,id=id)
-
-
-    return render(request,"detail.html",{"form": form})
+    nick = get_object_or_404(Nick,id=id)
+    comments = nick.comments.all()
+    print(comments)
+    return render(request,"detail.html",{"nick":nick,"comments":comments})
 
 
 @login_required(login_url="user:login")
@@ -98,6 +100,19 @@ def nicks(request):
     return render(request,"nicks.html",context)
 
 
+def addComment(request,id):
+    nick = get_object_or_404(Nick,id = id)
+
+    if request.method == "POST":
+        comment_author = request.user
+        comment_content = request.POST.get("comment_content")
+
+        newComment = Comment(comment_author  = comment_author, comment_content = comment_content)
+
+        newComment.nick = nick
+
+        newComment.save()
+    return redirect(reverse("nick:detail",kwargs={"id":id}))
     
 
 

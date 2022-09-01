@@ -7,23 +7,23 @@
  <div class="col-lg-8">
 
     <!-- Title -->
-    <h3 class="mt-4">{{form.title}}</h3>
+    <h3 class="mt-4">{{nick.title}}</h3>
 
     <!-- Author -->
     <p class="lead">
       
-      {{form.author.username}} tarafından yayınlandı
+      {{nick.author.username}} tarafından yayınlandı
     </p>
 
     <hr>
 
     <!--Date/Time -->
-    <p>{{form.created_date}}</p>
+    <p>{{nick.created_date}}</p>
 
     <hr>
 
     <!--  Preview Image  -->
-    {% if form.article_image %}
+    {% if nick.article_image %}
     <img class="img-fluid rounded" src="{{form.article_image.url}}" alt="">
     {% endif %} 
    
@@ -32,12 +32,49 @@
 
     <!-- Post Content -->
     <p class="lead">
-        {{form.content|safe}}
+        {{nick.content|safe}}
     </p>
 
+    <h4>Yorumlar</h4>
     <hr>
+    {% if comments %}
+    {% for comment in comments  %}
+      <div class="media mb-4">
+        <img class="d-flex mr-3 rounded-circle" src="http://placehold.it/50x50" alt="">
+        <div class="media-body">  <hr>
+          <h5 class="mt-0">{{comment.comment_author}}</h5>
+          {{comment.comment_date}} <br>
+          {{comment.comment_content}}
+        </div>
+      </div>
+    {% endfor %}
+    
+    
+    {% else %}
+    <div class ="alert alert-danger">
+      Bu makaleye herhangi bir yorum yazılmamış,ilk yorum yapan siz olun!
+    </div>
+    {% endif %}
+    
+    <hr>
+    <div class="card my-4">
+      <h5 class="card-header">Yorum Ekle:</h5>
+      <div class="card-body">
+        <form method = "post" action = "{% url 'nick:comment' nick.id %}">
+          {% csrf_token %}
+          <div class="form-group">
+            <p><small>{{request.user.username}} olarak yorum yapıyorsunuz. </small></p>
 
+            </div>
+          <div class="form-group">
+              <label for="formGroupExampleInput">Yorum</label>
+            <textarea name = "comment_content" class="form-control" rows="3"></textarea>
+          </div>
+          <button type="submit" class="btn btn-danger">Ekle</button>
+        </form>
+      </div>
+    </div>
 </div>
 
         
-{% endblock  %}
+{% endblock body %}

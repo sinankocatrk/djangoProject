@@ -1,5 +1,5 @@
 from django import forms 
-from .models import Nick 
+from .models import Nick,Comment 
 
 
 class NickForm(forms.ModelForm):
